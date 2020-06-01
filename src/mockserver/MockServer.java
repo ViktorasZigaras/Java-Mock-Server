@@ -62,27 +62,29 @@ public class MockServer {
                                         bw.write("<body>");
                                         File[] files = dir.listFiles();
                                         System.out.println(files.length);
-                                        bw.write(dir.getAbsolutePath());
+                                        bw.write("<div>" + dir.getAbsolutePath() + "</div>");
                                         bw.newLine();
-                                        bw.write(files.length);
+                                        bw.newLine();
+                                        bw.write("<div>" + files.length + ":</div>");
                                         bw.newLine();
                                         for (File file : files) {
-                                            // Check if the file is a directory
+
                                             if (file.isDirectory()) {
-                                                // We will not print the directory name, just use it as a new
-                                                // starting point to list files from
-                                                bw.write(file.getAbsolutePath());
+//                                                bw.write(file.getAbsolutePath());
+                                                bw.write("<div><a href=\"/web/" + file.getName() + "\">" + file.getName() + " (folder)</a></div>");
                                                 bw.newLine();
                                                 System.out.println(file.getAbsolutePath());
                                             } else {
-                                                // We can use .length() to get the file size
-                                                bw.write(file.getName() + " (size in bytes: " + file.length()+")");
-                                                bw.newLine();
                                                 System.out.println(file.getName() + " (size in bytes: " + file.length()+")");
-                                                bw.write("<div><a href=\"/web/" + file.getName() + "\">" + file.getName() + "</a></div>");
+                                                bw.write("<div><a href=\"/web/" + file.getName() + "\">" + file.getName() + " (size in bytes: " + file.length() + ")</a></div>");
                                                 bw.newLine();
                                             }
                                         }
+                                        bw.write("<div></div>");
+                                        bw.newLine();
+                                        bw.write("<div><a href=\"/quit\">[QUIT]</a></div>");
+                                        bw.newLine();
+                                        bw.newLine();
                                         bw.write("</body>");
                                         bw.write("</html>");
                                         
@@ -100,6 +102,9 @@ public class MockServer {
                                             bw.newLine();
                                         } else if (fileName.endsWith(".txt")) {
                                             bw.write("Content-Type: text/plain");
+                                            bw.newLine();
+                                        } else if (fileName.endsWith(".png")) {
+                                            bw.write("Content-Type: image/png");
                                             bw.newLine();
                                         }
                                         
@@ -149,19 +154,7 @@ public class MockServer {
     
 }
 
-// http://localhost:9000/quit
-
 // TODO
-
-// 1. make index file, make available
-
-// 4. show their presence in index html
-
-// 5. on click them - display them
-
-// 6. display information like labels and counts
-
-// 8. leave instructions on how to use
 
 // extra: try images
 
@@ -169,4 +162,3 @@ public class MockServer {
 
 // http://localhost:9000/web
 // http://localhost:9000/quit
-// http://localhost:9000/web/test.txt
