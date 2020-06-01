@@ -95,7 +95,7 @@ public class MockServer {
                                             bw.write("Content-Type: text/html");
                                             bw.newLine();
                                         } else if (fileName.endsWith(".js")) {
-                                            bw.write("Content-Type: text/javascript;charset=UTF-8");
+                                            bw.write("Content-Type: text/javascript; charset=UTF-8");
                                             bw.newLine();
                                         } else if (fileName.endsWith(".css")) {
                                             bw.write("Content-Type: text/css");
