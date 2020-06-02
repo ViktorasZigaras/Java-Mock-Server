@@ -2,30 +2,29 @@ package Threads;
 
 public class RaceSnail extends Thread {
     
-    private ThreadRace parent;
-    private String nameOwn;
+    private final Race parent;
+    private final String nameOwn;
     private int distance = 0;
     private int milestoneCount = 1;
-    private int maxDistance = 500;
-    private int milestone = 100;
-    private int minSpeed = 5;
-    private int maxSpeed = 10;
-    private int speed = maxSpeed - minSpeed;
-    private int minSleep = 1; // ms
-    private int maxSleep = 3; // ms
-    private int sleep = maxSleep - minSleep; // ms
+    private final int maxDistance = 500;
+    private final int milestone = 100;
+    private final int minSpeed = 5;
+    private final int maxSpeed = 10;
+    private final int speed = maxSpeed - minSpeed;
+    private final int minSleep = 1; // ms
+    private final int maxSleep = 3; // ms
+    private final int sleep = maxSleep - minSleep; // ms
     
-    public RaceSnail(String name/*, ThreadRace parent*/){
+    public RaceSnail(String name, Race parent){
         this.nameOwn = name;
         this.parent = parent;
     }
     
+    // currently unused
     public String getNameOwn() {return this.nameOwn;}
-    
     public int getDistance() {return this.distance;}
-    
-//    public void setDistance(int distance) {this.distance = distance;}
-    
+
+    @Override
     public void run() {
         while (this.distance < this.maxDistance) {
             this.distance += (int) (Math.random() * speed + minSpeed);
@@ -41,8 +40,7 @@ public class RaceSnail extends Thread {
         }
         String message = this.nameOwn + " done, travelled: " + this.distance;
         System.out.println(message);
-//        parent.declareWinner(message);
-//        System.out.println(message + " <<has won>>");
+        parent.declareWinner(message);
     }
     
 }
