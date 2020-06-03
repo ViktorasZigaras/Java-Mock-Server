@@ -8,11 +8,7 @@ public class ThreadRace {
         
         Race race = new Race();
         race.start();
-        try {
-            race.join();
-        } catch (InterruptedException ex) {
-            System.out.println(ex.getMessage());
-        }
+        try {race.join();} catch (InterruptedException ex) {System.out.println(ex.getMessage());}
         
         System.out.println("main is done");
     }
